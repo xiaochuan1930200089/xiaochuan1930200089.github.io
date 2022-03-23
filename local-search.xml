@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>Burp使用手册</title>
+    <link href="/2022/03/22/Burp%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/"/>
+    <url>/2022/03/22/Burp%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>美化Blog主题</title>
+    <link href="/2022/03/13/%E6%96%B0%E6%89%8B%E5%A6%82%E4%BD%95%E7%BE%8E%E5%8C%96Blog%E4%B8%BB%E9%A2%98-%E7%89%B9%E6%95%88/"/>
+    <url>/2022/03/13/%E6%96%B0%E6%89%8B%E5%A6%82%E4%BD%95%E7%BE%8E%E5%8C%96Blog%E4%B8%BB%E9%A2%98-%E7%89%B9%E6%95%88/</url>
+    
+    <content type="html"><![CDATA[<p>在学习如何美化博客之前，我们先简单回顾一下，博客是如何搭建的</p><h1 id="搭建博客"><a href="#搭建博客" class="headerlink" title="搭建博客"></a>搭建博客</h1><p>这里只是说明步骤，详细可参考<a href="https://www.csdn.net/">CNDS</a></p><p>1.注册GitHub，并建立自己的仓库，用来放置博客</p><p>2.安装git工具，生成SSH添加到GitHub。这里推荐一个B站up主<a href="https://www.bilibili.com/video/BV1mU4y1j72n?spm_id_from=333.337.search-card.all.click">视频搬运崽啊</a>超级详细，包括搭建博客，视频里都有教程</p><p>3.搭建本地环境，安装npm（或者nvm)和node</p><p>4.初始化Hexo、运行、部署</p><p>5.生成markdown文件，写文章并发布</p><h1 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h1><p>现在我们开始正式为自己的博客更换主题</p><h3 id="在官网hexo挑选主题"><a href="#在官网hexo挑选主题" class="headerlink" title="在官网hexo挑选主题"></a>在官网<a href="https://hexo.io/themes/">hexo</a>挑选主题</h3><p>我选择的是 <a href="https://github.com/fluid-dev/hexo-theme-fluid">fluid</a>这款主题。这里就拿这个举例啦。</p><h6 id="1-获得主题"><a href="#1-获得主题" class="headerlink" title="1.获得主题"></a>1.获得主题</h6><p>在博客文件夹下，Git Bush Here查看Hexok版本，（hexo -v）确定在5.0.0以上，我的是6.1.0。通过npm直接安装，命令：</p><figure class="highlight bash"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><pre><code class="hljs bash">npm install --save hexo-theme-fluid<br></code></pre></td></tr></table></figure><p>在博客目录下新建_config.fluid.yml，把主题的<a href="https://github.com/fluid-dev/hexo-theme-fluid/blob/master/_config.yml">_config.yml</a>复制进去</p><h6 id="2-切换主题"><a href="#2-切换主题" class="headerlink" title="2.切换主题"></a>2.切换主题</h6><p>进入Hexo目录，找到_config.yml，指定主题、语言。（这个主题需要修改语言，大部分只需改主题，大家见机行事hh）修改内容如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">theme: fluid  <br><br>language: zh-CN  <br></code></pre></td></tr></table></figure><h6 id="3-创建【关于】页"><a href="#3-创建【关于】页" class="headerlink" title="3.创建【关于】页"></a>3.创建【关于】页</h6><p>博客目录下</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo new page about<br></code></pre></td></tr></table></figure><p>成功后，博客目录下找到 &#x2F;source&#x2F;about&#x2F;index.md，添加 layout 属性。如下。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">---<br>title: about<br><span class="hljs-built_in">date</span>: 2020-02-23 19:20:33<br>layout: about<br>---<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="/2022/03/12/hello-world/"/>
+    <url>/2022/03/12/hello-world/</url>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  
+</search>
