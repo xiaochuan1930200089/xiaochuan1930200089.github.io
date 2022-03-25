@@ -16,15 +16,15 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="首先，我们先了解什么是Burp Suite。再了解它有什么功能，这样使用起来就顺滑了。 Burp Suite Burp Suite是一款*集成化的渗透测试工具，包含了很多功能，可以帮助我们高效地完成对Web应用程序的渗透测试和攻击。  Burp Suite由Java语言编写，基于Java自身的跨平台性，使这款软件学习和使用起来更方便。Burp Suite不像其他自动化测试工具，它需要手工配置一些参">
+    <meta name="description" content="首先，我们先了解什么是Burp Suite。再了解它有什么功能，这样使用起来就顺滑了。 Burp Suite Burp Suite是一款集成化的渗透测试工具，包含了很多功能，可以帮助我们高效地完成对Web应用程序的渗透测试和攻击。  Burp Suite由Java语言编写，基于Java自身的跨平台性，使这款软件学习和使用起来更方便。Burp Suite不像其他自动化测试工具，它需要手工配置一些参数">
 <meta property="og:type" content="article">
 <meta property="og:title" content="BurpSuite 模块简介">
 <meta property="og:url" content="http://example.com/2022/03/22/BurpSuite%E9%83%A8%E5%88%86%E6%A8%A1%E5%9D%97%E7%AE%80%E4%BB%8B/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="首先，我们先了解什么是Burp Suite。再了解它有什么功能，这样使用起来就顺滑了。 Burp Suite Burp Suite是一款*集成化的渗透测试工具，包含了很多功能，可以帮助我们高效地完成对Web应用程序的渗透测试和攻击。  Burp Suite由Java语言编写，基于Java自身的跨平台性，使这款软件学习和使用起来更方便。Burp Suite不像其他自动化测试工具，它需要手工配置一些参">
+<meta property="og:description" content="首先，我们先了解什么是Burp Suite。再了解它有什么功能，这样使用起来就顺滑了。 Burp Suite Burp Suite是一款集成化的渗透测试工具，包含了很多功能，可以帮助我们高效地完成对Web应用程序的渗透测试和攻击。  Burp Suite由Java语言编写，基于Java自身的跨平台性，使这款软件学习和使用起来更方便。Burp Suite不像其他自动化测试工具，它需要手工配置一些参数">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-03-22T14:13:05.547Z">
-<meta property="article:modified_time" content="2022-03-25T01:38:21.563Z">
+<meta property="article:modified_time" content="2022-03-25T03:42:14.801Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -196,7 +196,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      249 字
+      749 字
     </span>
   
 
@@ -205,7 +205,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3 分钟
+      7 分钟
     </span>
   
 
@@ -239,14 +239,54 @@
             <div class="markdown-body">
               <p>首先，我们先了解什么是Burp Suite。再了解它有什么功能，这样使用起来就顺滑了。</p>
 <h1 id="Burp-Suite"><a href="#Burp-Suite" class="headerlink" title="Burp Suite"></a>Burp Suite</h1><ul>
-<li><p>Burp Suite是一款*<strong>集成化的渗透测试工具</strong>，包含了很多功能，可以帮助我们高效地完成对Web应用程序的渗透测试和攻击。</p>
+<li><p>Burp Suite是一款<strong>集成化的渗透测试工具</strong>，包含了很多功能，可以帮助我们高效地完成对Web应用程序的渗透测试和攻击。</p>
 </li>
 <li><p>Burp Suite由Java语言编写，基于Java自身的跨平台性，使这款软件学习和使用起来更方便。Burp Suite不像其他自动化测试工具，它需要手工配置一些参数，触发一些自动化流程，然后才会开始工作。</p>
 </li>
 <li><p>其实，Burp Suite就是一个抓包、改包的工具</p>
 </li>
 </ul>
-<h1 id="模块简介"><a href="#模块简介" class="headerlink" title="模块简介"></a>模块简介</h1><h3 id="Proxy代理模块"><a href="#Proxy代理模块" class="headerlink" title="Proxy代理模块"></a>Proxy代理模块</h3>
+<h1 id="Proxy模块"><a href="#Proxy模块" class="headerlink" title="Proxy模块"></a>Proxy模块</h1><h3 id="Options模块"><a href="#Options模块" class="headerlink" title="Options模块"></a>Options模块</h3><p>用于设置代理监听、请求和响应，拦截反应，匹配和替换，ssl等</p>
+<ol>
+<li>选项一：Proxy Listeners</li>
+</ol>
+<ul>
+<li><p>默认情况下，Burp默认监听127.0.0.1地址8080作为代理服务器</p>
+</li>
+<li><p>要使用这个监听器，需要配置浏览器使用127.0.0.1：8080作为代理服务器</p>
+</li>
+</ul>
+<ol start="2">
+<li>选项二：Intercept Client Requests</li>
+</ol>
+<ul>
+<li><p>配置拦截规则，设置拦截的匹配规则</p>
+</li>
+<li><p>当Intercept request based on the following rules 为选择状态时，burpsuite会配置列表中的规则进行拦截或转发</p>
+</li>
+<li><p>规则可以为：域名、IP地址、协议、HTTP方法、URL，文件拓展名，参数、cookie、头&#x2F;主题内容、状态代码等</p>
+</li>
+</ul>
+<ol start="3">
+<li>选项三：Intercept Server Responses</li>
+</ol>
+<ul>
+<li><p>基于服务端配置拦截规则，设置拦截的匹配规则</p>
+</li>
+<li><p>Intercept request based on the following rules 为选中状态时，burpsuite会匹配响应包</p>
+</li>
+</ul>
+<ol start="4">
+<li>选项四：Response Modification</li>
+</ol>
+<ul>
+<li><p>用于执行响应的自动修改</p>
+</li>
+<li><p>可以使用这些选项来自动修改HTML应用程序响应中匹配的内容</p>
+</li>
+</ul>
+<p>了解更多请见<a target="_blank" rel="noopener" href="https://blog.csdn.net/Waffle666/article/details/111083913">渗透测试工具Burp Suite详解</a></p>
+
             </div>
             <hr>
             <div>
